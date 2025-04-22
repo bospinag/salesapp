@@ -20,13 +20,13 @@ jobs:
           sudo mv cloudflared /usr/local/bin/
 
       - name: Connect and deploy via SSH (Cloudflare Access)
-      uses: appleboy/ssh-action@master
-      with:
-        host: ssh.mailtest.live
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        proxy_command: ${{ secrets.CLOUDFLARE_SSH_PROXY }}
-        script: |
-          cd ~/k8s/salesapp
-          git pull
-          kubectl rollout restart deployment salesapp
+        uses: appleboy/ssh-action@master
+        with:
+          host: ssh.mailtest.live
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          proxy_command: ${{ secrets.CLOUDFLARE_SSH_PROXY }}
+          script: |
+            cd ~/k8s/salesapp
+            git pull
+            kubectl rollout restart deployment salesapp

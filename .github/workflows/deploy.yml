@@ -28,7 +28,7 @@ jobs:
       - name: SSH to Homelab via Cloudflare Access
         run: |
           ssh -o ProxyCommand="cloudflared access ssh --hostname ssh.mailtest.live" -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@ssh.mailtest.live << 'EOF'
-            cd ~/k8s/salesapp
+            cd ~/salesapp
             git pull
-            kubectl rollout restart deployment salesapp
+            KUBECONFIG=/home/boxcarracer120/.kube/config /usr/local/bin/kubectl rollout restart deployment salesapp
           EOF

@@ -19,14 +19,16 @@ jobs:
           chmod +x cloudflared
           sudo mv cloudflared /usr/local/bin/
 
-      - name: Connect and deploy via SSH (Cloudflare Access)
-        uses: appleboy/ssh-action@master
-        with:
-          host: ssh.mailtest.live
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          proxy_command: ${{ secrets.CLOUDFLARE_SSH_PROXY }}
-          script: |
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: SSH to Homelab via Cloudflare Access
+        run: |
+          ssh -o ProxyCommand="cloudflared access ssh --hostname ssh.mailtest.live" -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@ssh.mailtest.live << 'EOF'
             cd ~/k8s/salesapp
             git pull
             kubectl rollout restart deployment salesapp
+          EOF

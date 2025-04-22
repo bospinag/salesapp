@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /var/run/dbus:/var/run/dbus        # Allow printer services
+      - /run/cups/cups.sock:/run/cups/cups.sock  # Talk to host CUPS
+    environment:
+      - CUPS_SERVER=/run/cups/cups.sock
+    env_file:
+      - .env
+    privileged: true

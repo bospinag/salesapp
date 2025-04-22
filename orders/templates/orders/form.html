@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Pedido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-light p-3">
+
+  <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">Nuevo Pedido</h2>
+    <form method="POST" class="space-y-4">
+      {% csrf_token %}
+      {% load form_tags %}
+
+      <div>
+        <label class="block mb-1 text-sm font-medium">Nombre</label>
+        {{ form.nombre|add_class:"w-full border border-gray-300 rounded-md p-2" }}
+      </div>
+
+      <div>
+        <label class="block mb-1 text-sm font-medium">Cédula</label>
+        {{ form.cedula|add_class:"w-full border border-gray-300 rounded-md p-2" }}
+      </div>
+
+      <div>
+        <label class="block mb-1 text-sm font-medium">Teléfono</label>
+        {{ form.telefono|add_class:"w-full border border-gray-300 rounded-md p-2" }}
+      </div>
+
+      <div>
+        <label class="block mb-1 text-sm font-medium">Dirección</label>
+        {{ form.direccion_raw|add_class:"w-full border border-gray-300 rounded-md p-2" }}
+      </div>
+
+      <div class="flex items-center">
+        {{ form.pago_en_casa|add_class:"mr-2" }}
+        <label class="text-sm">Pago en casa</label>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-sm font-medium">Precio</label>
+        {{ form.precio|add_class:"w-full border border-gray-300 rounded-md p-2" }}
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+        Crear Pedido
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

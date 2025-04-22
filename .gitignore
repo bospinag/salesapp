@@ -1,0 +1,29 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environment
+salesenv/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+media/
+staticfiles/
+
+# Environment
+.env
+
+# WeasyPrint and cache files
+*.pdf
+*.zpl
+label.txt
+test.zpl
+
+# OS files
+.DS_Store
+
+# Docker
+*.pid

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Etiqueta de Envío</title>
+	<style>
+	  @page {
+	    size: 4in 6in;
+	    margin: 0;
+	  }
+	  body {
+	    font-family: 'Montserrat', sans-serif;
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    height: 100%;
+	    box-sizing: border-box;
+	  }
+	</style>
+
+</head>
+<body>
+
+	<div style="min-height: 6in; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+		<!-- HEADER -->
+		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid black; padding-bottom: 12px;">
+		  <div style="display: flex; align-items: center; gap: 10px;">
+		    <!-- Logo Circle -->
+		    <div style="width: 40px; height: 40px; border: 2px solid black; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; line-height: 1;">
+		      <div style="font-size: 16px;">M</div>
+		      <div style="font-size: 14px;">B</div>
+		    </div>
+		    <!-- Text next to logo -->
+		    <div style="font-size: 14px;">
+		      <div style="font-weight: bold; font-size: 16px;">MariaBonitta</div>
+		      <div style="font-size: 12px;">Envios desde Cota</div>
+		    </div>
+		  </div>
+		  <!-- QR Code -->
+		  <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://instagram.com/mariabonitta2024" alt="QR" style="width: 60px; height: 60px;">
+		</div>
+
+		<!-- DESTINATARIO BLOCK -->
+		<div style="border: 1px solid black; padding: 12px; border-radius: 4px; font-size: 13px;">
+		  <h2 style="font-size: 16px; margin: 0 0 8px 0;">Destinatario</h2>
+		  <p style="margin: 4px 0;"><strong>Nombre:</strong> {{ order.nombre }}</p>
+		  <p style="margin: 4px 0;"><strong>Cedula:</strong> {{ order.cedula }}</p>
+		  <p style="margin: 4px 0;"><strong>Teléfono:</strong> {{ order.telefono }}</p>
+		  <p style="margin: 4px 0;"><strong>Dirección:</strong><br>{{ order.direccion_formateada|linebreaksbr }}</p>
+
+		  {% if order.pago_en_casa %}
+		    <p style="margin: 8px 0; font-weight: bold;">PAGO EN CASA</p>
+		    <p><strong>Precio:</strong> ${{ order.precio|floatformat:0 }}</p>
+		  {% endif %}
+		</div>
+		<div style="text-align: center; font-size: 11px; margin-top: 20px;">
+		  <p style="text-transform: uppercase; margin-bottom: 6px;">gracias por tu compra</p>
+		  <div>
+		    instagram: @mariabonitta2024 &nbsp;&nbsp; whatsapp: 317 005 7159
+		  </div>
+</div>
+	   
+	</div>
+</body>
+</html>
